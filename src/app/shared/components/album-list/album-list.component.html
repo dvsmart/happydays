@@ -1,0 +1,49 @@
+<!-- <mat-list>
+    <h3 mat-subheader>Albums</h3>
+    <mat-list-item *ngFor="let album of albums" (click)="onSelect(album)" [class.selected]="album === selectedAlbum">
+      <mat-icon mat-list-icon>folder</mat-icon>
+      <h4 mat-line>{{album.title}}</h4>
+      <p mat-line> {{album.caption}} </p>
+      <p mat-line> {{album.updated | date}} </p>
+    </mat-list-item>
+</mat-list> -->
+<div class="row">
+  <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+    <div class="header">
+        <h3>Albums</h3>
+        <div>
+            <button mat-raised-button (click)="openDialog()">Add Album</button>
+            <p *ngIf="albumName.value">{{albumName}}</p>
+          <!-- <form #myForm="ngForm" (ngSubmit)="onSubmit()">
+              <mat-form-field>
+                  <input matInput placeholder="Create New Album" type="text" [formControl]="albumName">
+              </mat-form-field>
+              <button mat-button type="submit">Create</button>
+          </form> -->
+        </div>
+    </div>
+    <div>
+        <mat-grid-list cols="3" rowHeight="450px;">
+            <mat-grid-tile *ngFor="let album of albums$ | async" (click)="onSelect(album)">
+                <mat-card class="example-card">
+                    <mat-card-header>
+                      <mat-card-title>{{album.name}}</mat-card-title>
+                      <mat-card-subtitle>{{album.caption}} | {{album.updated | date}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+                    <mat-card-content>
+                      <p>
+                        some funny text
+                      </p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <i class="material-icons">favorite</i>
+                        <i class="material-icons">share</i>
+                    </mat-card-actions>
+                  </mat-card>
+            </mat-grid-tile>
+          </mat-grid-list>
+    </div>
+  </div>
+</div>
+
