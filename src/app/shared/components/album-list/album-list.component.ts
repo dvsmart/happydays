@@ -1,13 +1,19 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Album, albums } from '../../models/album.model';
+import { Album} from '../../models/album.model';
 import { Router } from '@angular/router';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AlbumService } from '../../services/album.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { MatDialog } from '@angular/material';
 import { AddAlbumDialog } from './add-album-dialog.component';
+import { Subscription } from 'rxjs/Subscription';
+import { ObservableMedia } from '@angular/flex-layout';
+
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/takeWhile";
+import "rxjs/add/operator/startWith";
 
 @Component({
   selector: 'app-album-list',
@@ -15,26 +21,24 @@ import { AddAlbumDialog } from './add-album-dialog.component';
   styleUrls: ['./album-list.component.scss']
 })
 export class AlbumListComponent implements OnInit {
-  albums$ : Observable<Album[]>;
+  albums : Album[];
   albumName:FormControl;
   albumModel:Album;
+  errorMessage:Observable<string>;
+  cols: Observable<number>;
 
-  private _todos: BehaviorSubject<Album[]>;
+  loadSub: Subscription;
 
-  dataSubject = new BehaviorSubject<any[]>([]);
-
-  constructor(private router: Router,private albumService: AlbumService,public dialog: MatDialog) {
+  constructor(private router: Router,private albumService: AlbumService,public dialog: MatDialog,private media: ObservableMedia) {
+    this.loadAll();
   }
 
   loadAll() {
-    this.albumService.getAlbums().subscribe(data => {
-      this._todos.next(data);
-    }, error => console.log('Could not load todos.'));
+    this.albumService.getAlbums().subscribe(x=> {this.albums = x;console.log(x);});
+    console.log(this.albums);
   }
-
-  get todos() {
-    return this._todos.asObservable();
-  }
+  
+  
   
   openDialog(): void {
     let dialogRef = this.dialog.open(AddAlbumDialog, {
@@ -43,32 +47,61 @@ export class AlbumListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      debugger;
-      console.log('The dialog was closed');
-      this.albumName.setValue(result);
-      this.albumModel.name = this.albumName.value;
-      this.albumModel.isPublic = true;
-      this.albumService.createAlbum(this.albumModel);
-      this.albumName.valueChanges.subscribe(x=>this.albums$ = this.albumService.getAlbums());
+      if(this.validateInput){
+        this.albumName.setValue(result);
+        this.albumModel.name = this.albumName.value;
+        this.albumModel.isPublic = true;
+        this.albumService.createAlbum(this.albumModel).subscribe(x=> this.loadAll());
+      }else{
+        this.errorMessage.subscribe(x=> "Already Exists. Please choose a different name and try again.");
+      }
     });
+  }
+
+ 
+
+  validateInput(name:string): boolean{
+      var isValid = false;
+      var localAlbums = this.albums;
+      isValid = localAlbums.some(function (el) {
+         return el.name === name ? false: true;
+        });
+      if(name !== "" && name !== undefined){
+          isValid = true;
+      }
+      return isValid;
   }
   
   ngOnInit() {
-    this.albumName = new FormControl();
+    this.updateGrid();
+    this.albumName = new FormControl('');
     this.albumModel = new Album();
-    this.albums$ = this.albumService.getAlbums();
-    this.albumService.getAlbums().subscribe(x=> this.dataSubject.next(x));
   }
 
   onSelect(album: Album){
-    this.router.navigateByUrl('/photos/'+ album.id, { skipLocationChange: true });
+    this.router.navigateByUrl('/photos/'+ album.id);
   }
 
-  onSubmit(){
-    this.albumModel.name = this.albumName.value;
-    this.albumModel.isPublic = true;
-    this.albumService.createAlbum(this.albumModel);
-    this.albumName.setValue("");
-    this.dataSubject.asObservable();
+  updateGrid(){
+    const grid = new Map([
+      ["xs", 1],
+      ["sm", 2],
+      ["md", 2],
+      ["lg", 3],
+      ["xl", 4]
+    ]);
+    let start: number;
+    grid.forEach((cols, mqAlias) => {
+      if (this.media.isActive(mqAlias)) {
+        start = cols;
+      }
+    });
+    this.cols = this.media.asObservable()
+      .map(change => {
+        console.log(change);
+        console.log(grid.get(change.mqAlias));
+        return grid.get(change.mqAlias);
+      })
+      .startWith(start);
   }
 }

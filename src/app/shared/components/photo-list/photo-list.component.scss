@@ -4,3 +4,19 @@
 .thumbnail_holder { height: 182px; margin-bottom: 5px; margin-right: 10px; }
 .info td, .uploaded_info td { font-size: 12px }
 .note { margin: 20px 0}
+
+.example-card {
+    max-width: 300px;
+    border-radius: 8px;
+  }
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+
+  mat-card img{
+    object-fit: cover; /*this makes de image in src fit to the size of specified below*/
+    width: 100%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+    height: 80%;
+  }

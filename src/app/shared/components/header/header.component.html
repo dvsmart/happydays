@@ -1,14 +1,19 @@
-<mat-toolbar color="primary">
-    <button mat-icon-button (click)="toggleSide()">
-        <mat-icon>menu</mat-icon>
-      </button>
-  <span>Some title</span>
-  <span class="spacer"></span>
-  <button mat-button mat-ripple>Home</button>
-      <button mat-button>Settings</button>
-      <button mat-button [matMenuTriggerFor]="menu">Menu</button>
-      <mat-menu #menu="matMenu">
-            <button mat-menu-item>Item 1</button>
-            <button mat-menu-item>Item 2</button>
-      </mat-menu>
-</mat-toolbar>
+<div fxLayout="column" fxFlex>
+        <mat-toolbar color="primary">
+          <button mat-icon-button (click)="toggleSide()">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <button mat-button routerLink="/">
+            <span>Some title</span>
+          </button>
+          <span class="spacer"></span>
+                <button mat-button>Home</button>
+                <button mat-button>Settings</button>
+                <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item>Item 1</button>
+                    <button mat-menu-item>Item 2</button>
+                </mat-menu> 
+        </mat-toolbar>
+</div>
+

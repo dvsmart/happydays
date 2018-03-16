@@ -1,3 +1,20 @@
-<p>photolist </p>
-<app-file-upload></app-file-upload>
-<!-- <cl-image public-id="sample.jpg" ></cl-image> -->
+
+<app-file-upload [albumId]="albumId" (notify)="receiveMessage($event)"></app-file-upload>
+<div class="card">
+        <div class="card-body">
+                <mat-grid-list [cols]="4" rowHeight="450px;">
+                        <mat-grid-tile *ngFor="let photo of photos" (click)="onSelect(album)">
+                            <mat-card class="example-card">
+                                <mat-card-header>
+                                  <mat-card-title>{{photo.name}}</mat-card-title>
+                                </mat-card-header>
+                                <img mat-card-image [src]="photo.secureUrl" [title]="photo.name" [alt]="photo.name" style="width:300px;height:280px;">
+                                <mat-card-actions>
+                                    <i class="material-icons float-sm-left" >favorite</i>
+                                    <i class="material-icons float-sm-right">share</i>
+                                </mat-card-actions>
+                              </mat-card>
+                        </mat-grid-tile>
+                      </mat-grid-list>
+        </div>
+        </div>

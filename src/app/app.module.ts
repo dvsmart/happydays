@@ -12,12 +12,10 @@ import { SidenavComponent } from './shared/components/sidenav/sidenav.component'
 import { HeaderComponent } from './shared/components/header/header.component';
 import { MaterialModule } from './shared/material.module';
 import { PageModule } from './pages/page.module';
-import { FileUploadModule ,FileSelectDirective} from 'ng2-file-upload';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
-
-import { CloudinaryModule, CloudinaryConfiguration, CloudinaryImage } from '@cloudinary/angular-5.x';
-import * as  Cloudinary from 'cloudinary-core';
 import { AddAlbumDialog } from './shared/components/album-list/add-album-dialog.component';
+import { BreadcrumbComponent } from './shared/components/breadcrumb/breadcrumb.component';
 
 
 @NgModule({
@@ -26,17 +24,17 @@ import { AddAlbumDialog } from './shared/components/album-list/add-album-dialog.
     LayoutComponent,
     SidenavComponent,
     HeaderComponent,
+    BreadcrumbComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
-    FileUploadModule,
+    FlexLayoutModule,
     MaterialModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'vjcloud',api_key:'964577996685692',api_secret:'U_37RS6h4z4WJJC5qerbU-Ez0AY',secure:true } as CloudinaryConfiguration),
     HttpClientModule,
     PageModule
   ],

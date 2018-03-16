@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Cloudinary } from '@cloudinary/angular-5.x';
 import { Observable } from 'rxjs/Observable';
 import {map} from 'rxjs/operators';
 import { Album } from '../models/album.model';
@@ -11,10 +10,10 @@ export class AlbumService {
   url = 'http://localhost:63159/api/Album';
 
   
-  constructor(private http: HttpClient, private cloudinary: Cloudinary) { }
+  constructor(private http: HttpClient) { }
 
   createAlbum(album:Album) {
-    return this.http.post(this.url, album).subscribe();
+    return this.http.post(this.url, album);
   }
   
   getAlbums() : Observable<Album[]> {

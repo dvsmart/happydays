@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, HostListener, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSidenav } from '@angular/material';
 
@@ -9,6 +9,9 @@ import { MatSidenav } from '@angular/material';
 })
 export class LayoutComponent implements OnInit {
   @Output() open:boolean;
+
+  mode:string;
+
   constructor(private router: Router) {
     this.open = true;
    }
@@ -17,9 +20,22 @@ export class LayoutComponent implements OnInit {
   
 
   ngOnInit() {
+    if (window.innerWidth < 768) {
+      this.open = false;
+    }
   }
 
   onNotify(message:boolean):void {
     this.open = this.open ? false : true;
   }
+
+  @HostListener('window:resize', ['$event'])
+    onResize(event) {
+        if (event.target.innerWidth < 768) {
+            this.open = false;
+        }
+        if (event.target.innerWidth > 768) {
+           this.open = true;
+        }
+    }
 }

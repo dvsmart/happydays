@@ -1,33 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Cloudinary } from '@cloudinary/angular-5.x';
 import { Observable } from 'rxjs/Observable';
 import { Photo } from '../models/photo.model';
 import {map} from 'rxjs/operators';
 
 @Injectable()
 export class PhotoService {
+    url = 'http://localhost:63159/api/Image/';
+  constructor(private http: HttpClient) { }
 
-  constructor(private http: HttpClient, private cloudinary: Cloudinary) { }
 
+  getPhotos(id: number): Observable<Photo[]> {
+    return this.http.get<Photo[]>(this.url + id);
+    }
 
-  getPhotos(): Observable<Photo[]> {
-    // instead of maintaining the list of images, we rely on the 'myphotoalbum' tag
-    // and simply retrieve a list of all images with that tag.
-    let url = this.cloudinary.url('myphotoalbum', {
-        format: 'json',
-        type: 'list',
-        // cache bust (lists are cached by the CDN for 1 minute)
-        // *************************************************************************
-        // Note that this is practice is DISCOURAGED in production code and is here
-        // for demonstration purposes only
-        // *************************************************************************
-        version: Math.ceil(new Date().getTime() / 1000)
-    });
-
-    return this.http
-        .get(url)
-        .pipe(map((data: any) => data.resources));
-}
-
+    postFile(photoModel: any): Observable<boolean> {
+      const endpoint = 'http://localhost:63159/api/imageupload';
+      return this.http
+        .post(endpoint, photoModel)
+        .map(() => { return true; });
+  }
 }

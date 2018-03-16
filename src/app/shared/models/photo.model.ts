@@ -1,4 +1,6 @@
 export class Photo {
-    public_id: string;
-    context: any;
+    name:string;
+    file:any;    
+    addedBy:number
+    url:string;
   }
