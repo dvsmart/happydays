@@ -3,3 +3,30 @@ $anms-accent: mat-palette($mat-light-blue);
 $anms-warn: mat-palette($mat-pink, 600);
 
 $anms-theme: mat-light-theme($anms-primary, $anms-accent, $anms-warn);
+
+$side-nav-default-background:(rgba(116, 128, 199, 0.61));
+
+.default-theme{
+    @include angular-material-theme($anms-theme);
+
+    .card-body{
+        background-color: $side-nav-default-background;
+    }
+
+    .example-sidenav{
+        background-color: $side-nav-default-background;
+    
+        .mat-list-item{
+            color: white;
+    
+            .mat-icon{
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
+
+
+
+

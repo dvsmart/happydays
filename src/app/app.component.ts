@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Theme } from './shared/models/theme.model';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  isLoggedIn:boolean;
+
+  constructor() {
+    this.isLoggedIn = false;
+  }
+ 
 }

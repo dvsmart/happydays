@@ -1,14 +1,13 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Bob" formControlName="name">
-              </div>
-        <div class="form-group">
-                <label for="content">Choose File</label>
-                <input type="file" id="content" (change)="onFileChange($event)" #fileInput>
-        </div>
-        <button mat-button type="submit" [disabled]='form.invalid'>Upload</button>
-        <div *ngIf="loading">
-                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-        </div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="example-container">
+                <mat-form-field color="accent">
+                  <input matInput placeholder="Name" type="text" formControlName="name">
+                </mat-form-field>  
+                  <input type="file" id="content" (change)="onFileChange($event)" #fileInput>
+                  <div style="margin-top:15px;">
+                      <button mat-raised-button color="accent" type="submit" [disabled]='form.invalid'>Upload</button>
+                  </div>
+                <div *ngIf="loading">
+                        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                </div>
 </form>
+

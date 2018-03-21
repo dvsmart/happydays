@@ -7,3 +7,23 @@ $anms-nature-theme: mat-light-theme(
   $anms-nature-accent,
   $anms-nature-warn
 );
+
+$side-nav-nature-background:(#D7CCC8);
+
+.nature-theme{
+  @include angular-material-theme($anms-nature-theme);
+
+  .example-sidenav{
+    background: $side-nav-nature-background;
+  
+    .mat-list-item{
+        color: white;
+  
+        .mat-icon{
+            margin-right: 10px;
+        }
+    }
+  }
+}
+
+

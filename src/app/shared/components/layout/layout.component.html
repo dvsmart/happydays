@@ -1,12 +1,11 @@
-<mat-sidenav-container class="example-container">
+<div [ngClass]="themeClass">
+        <mat-sidenav-container class="example-container">
                 <mat-sidenav #sidenav mode="side" [(opened)]="open" [disableClose]="false" class="example-sidenav">
-                                <mat-list>
-                                        <app-sidenav></app-sidenav>
-                                </mat-list>
-                        </mat-sidenav>
+                        <app-sidenav></app-sidenav>
+                </mat-sidenav>
         <mat-sidenav-content>
                 <div class="fixed-header">
-                     <app-header (notify)='onNotify($event)'></app-header>
+                     <app-header (notify)='onNotify($event)' (themeChanger)='onThemeChange($event)'></app-header>
                 </div>
                 <div class="main-content">
                         <div class="container-fluid">
@@ -15,4 +14,5 @@
                         </div>
                 </div>
         </mat-sidenav-content>
-</mat-sidenav-container>
+        </mat-sidenav-container>
+</div>

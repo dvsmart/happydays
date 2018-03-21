@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, Output, HostListener, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSidenav } from '@angular/material';
+import { Theme } from '../../models/theme.model';
 
 @Component({
   selector: 'app-layout',
@@ -10,10 +11,14 @@ import { MatSidenav } from '@angular/material';
 export class LayoutComponent implements OnInit {
   @Output() open:boolean;
 
+  themeClass:string;
   mode:string;
 
+  
+ 
   constructor(private router: Router) {
     this.open = true;
+   
    }
   logo = 'assets/logo.png';
 
@@ -27,6 +32,10 @@ export class LayoutComponent implements OnInit {
 
   onNotify(message:boolean):void {
     this.open = this.open ? false : true;
+  }
+
+  onThemeChange(theme:string) {
+    this.themeClass = theme;
   }
 
   @HostListener('window:resize', ['$event'])

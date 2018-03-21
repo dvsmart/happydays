@@ -59,7 +59,6 @@ export class FileUploadComponent implements OnInit {
         const formModel = this.prepareSave(this.form.value);
         this.loading = true;
         this.photoService.postFile(formModel).subscribe(data => {
-            console.log(data);
             this.notify.emit(true);
             this.fileInput.nativeElement.value = "";
             this.createForm();

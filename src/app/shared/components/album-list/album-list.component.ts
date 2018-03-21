@@ -26,8 +26,7 @@ export class AlbumListComponent implements OnInit {
   albumModel:Album;
   errorMessage:Observable<string>;
   cols: Observable<number>;
-
-  loadSub: Subscription;
+  defaultImg: string;
 
   constructor(private router: Router,private albumService: AlbumService,public dialog: MatDialog,private media: ObservableMedia) {
     this.loadAll();
@@ -35,7 +34,7 @@ export class AlbumListComponent implements OnInit {
 
   loadAll() {
     this.albumService.getAlbums().subscribe(x=> {this.albums = x;console.log(x);});
-    console.log(this.albums);
+    this.defaultImg = "./assets/download.png";
   }
   
   

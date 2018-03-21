@@ -9,10 +9,9 @@
           <span class="spacer"></span>
                 <button mat-button>Home</button>
                 <button mat-button>Settings</button>
-                <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+                <button mat-button [matMenuTriggerFor]="menu">Themes</button>
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item>Item 1</button>
-                    <button mat-menu-item>Item 2</button>
+                    <button mat-menu-item *ngFor="let theme of themes" (click)="onSelect(theme)">{{theme.name}}</button>
                 </mat-menu> 
         </mat-toolbar>
 </div>

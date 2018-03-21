@@ -3,7 +3,7 @@ export class Album{
     name:string;
     caption:string;
     isPublic:boolean;
-    imageCount?:number;
+    imagesCount?:number;
     coverImage?:string;
     addedOn?:Date;
     updated?:Date

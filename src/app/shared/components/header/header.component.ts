@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Theme } from '../../models/theme.model';
 
 @Component({
   selector: 'app-header',
@@ -7,8 +8,15 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
  @Output() notify: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-  constructor() { }
+ @Output() themeChanger: EventEmitter<string> = new EventEmitter<string>();
+ themes: Theme[];
+  constructor() {
+    this.themes = [];
+    this.themes.push(new Theme('Light','light-theme'))
+    this.themes.push(new Theme('Dark','dark-theme'))
+    this.themes.push(new Theme('Nature','nature-theme'))
+    this.themes.push(new Theme('Default','default-theme'))
+   }
   logo = 'assets/logo.png';
 
   navigation = [
@@ -21,6 +29,10 @@ export class HeaderComponent implements OnInit {
 
   toggleSide(){
     this.notify.emit(true);
+  }
+
+  onSelect(theme: Theme){
+    this.themeChanger.emit(theme.className);
   }
  
 }

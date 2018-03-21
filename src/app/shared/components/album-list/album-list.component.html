@@ -9,25 +9,33 @@
               </div>
           </div>
         </div>
-        <div class="card-body">
+        <div class="card-body" color="primary">
             <mat-grid-list [cols]="cols | async" rowHeight="450px;">
                 <mat-grid-tile *ngFor="let album of albums" (click)="onSelect(album)">
                     <mat-card class="example-card">
                         <mat-card-header>
                             <div mat-card-avatar class="material-icons">photo_album</div>
                           <mat-card-title>{{album.name}}</mat-card-title>
-                          <mat-card-subtitle>{{album.createdBy}} | {{album.addedOn | date}}</mat-card-subtitle>
+                          <mat-card-subtitle><b>{{album.createdBy}}</b> | {{album.addedOn | date}}</mat-card-subtitle>
+                          <button mat-icon-button color="accent">{{album.imagesCount}}
+                            <mat-icon aria-label="Pictures">photo_library</mat-icon>
+                          </button>
                         </mat-card-header>
-                        <img mat-card-image [src]="album.coverImage" alt="Photo of a Shiba Inu">
+                        <img mat-card-image *ngIf="album.coverImage != undefined" [src]="album.coverImage" [alt]="album.name">
+                        <img mat-card-image *ngIf="album.coverImage == undefined" [src]="defaultImg" [alt]="album.name">
                         <mat-card-content>
                           <p>
                             some funny text
                           </p>
                         </mat-card-content>
                         <mat-card-actions>
-                            <i class="material-icons float-sm-left" >favorite</i>
-                            <i class="material-icons float-sm-right">share</i>
-                            <i class="material-icons">{{album.imageCount}} photo_library</i>
+                            
+                            <button mat-mini-fab class="float-sm-right">
+                              <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+                            </button>
+                            <button mat-mini-fab>
+                              <mat-icon aria-label="Example icon-button with a heart icon">share</mat-icon>
+                            </button>
                         </mat-card-actions>
                       </mat-card>
                 </mat-grid-tile>

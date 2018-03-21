@@ -16,6 +16,10 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { AddAlbumDialog } from './shared/components/album-list/add-album-dialog.component';
 import { BreadcrumbComponent } from './shared/components/breadcrumb/breadcrumb.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { AuthService } from './shared/services/authservice.service';
+import { AuthGuard } from './shared/_guards/authguard';
 
 
 @NgModule({
@@ -24,7 +28,9 @@ import { BreadcrumbComponent } from './shared/components/breadcrumb/breadcrumb.c
     LayoutComponent,
     SidenavComponent,
     HeaderComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -38,8 +44,7 @@ import { BreadcrumbComponent } from './shared/components/breadcrumb/breadcrumb.c
     HttpClientModule,
     PageModule
   ],
-  providers: [],
-  
+  providers: [AuthGuard,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
