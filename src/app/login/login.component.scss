@@ -1,0 +1,14 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 100%;
+  }
+  $breakpoint-tablet: 768px;
+  @media (min-width: $breakpoint-tablet) {
+    .example-container{
+        width: 400px;
+    }
+  }

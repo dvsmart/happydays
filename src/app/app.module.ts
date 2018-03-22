@@ -19,7 +19,7 @@ import { BreadcrumbComponent } from './shared/components/breadcrumb/breadcrumb.c
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { AuthService } from './shared/services/authservice.service';
-import { AuthGuard } from './shared/_guards/authguard';
+import { AuthGuard } from './_guards/authguard';
 
 
 @NgModule({

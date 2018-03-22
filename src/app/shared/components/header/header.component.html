@@ -12,7 +12,10 @@
                 <button mat-button [matMenuTriggerFor]="menu">Themes</button>
                 <mat-menu #menu="matMenu">
                     <button mat-menu-item *ngFor="let theme of themes" (click)="onSelect(theme)">{{theme.name}}</button>
-                </mat-menu> 
+                </mat-menu>
+          <button mat-button (click)="onLogout()">
+            Logout
+          </button> 
         </mat-toolbar>
 </div>
 

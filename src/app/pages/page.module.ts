@@ -13,9 +13,11 @@ import { FileUploadComponent } from '../shared/components/file-upload/file-uploa
 import { ImagePreview } from '../shared/directives/imagePreview.directive';
 import { AlbumService } from '../shared/services/album.service';
 import { AddAlbumDialog } from '../shared/components/album-list/add-album-dialog.component';
+import { AuthService } from '../shared/services/authservice.service';
 
 const routes: Routes = [
   {path:'Albums',component:AlbumComponent},
+  {path:'MyAlbums',component:MyalbumComponent},
   {path:'photos/:id',component:PhotoListComponent},
 ];
 
@@ -24,7 +26,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forChild(routes),
     FormsModule,
     ReactiveFormsModule,
   ],

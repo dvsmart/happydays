@@ -8,11 +8,6 @@ import { Theme } from './shared/models/theme.model';
 })
 export class AppComponent {
   title = 'app';
-
-  isLoggedIn:boolean;
-
   constructor() {
-    this.isLoggedIn = false;
   }
- 
 }

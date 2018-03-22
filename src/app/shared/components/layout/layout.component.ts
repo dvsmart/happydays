@@ -11,14 +11,18 @@ import { Theme } from '../../models/theme.model';
 export class LayoutComponent implements OnInit {
   @Output() open:boolean;
 
+
   themeClass:string;
   mode:string;
+  isloggedIn: boolean;
 
   
  
   constructor(private router: Router) {
     this.open = true;
-   
+    if (localStorage.getItem('user') != null) {
+      this.isloggedIn = true;
+    }
    }
   logo = 'assets/logo.png';
 
@@ -37,6 +41,11 @@ export class LayoutComponent implements OnInit {
   onThemeChange(theme:string) {
     this.themeClass = theme;
   }
+  
+  onLogout(authenticated:boolean){
+    debugger;
+    this.isloggedIn = authenticated;
+  }  
 
   @HostListener('window:resize', ['$event'])
     onResize(event) {

@@ -1,11 +1,11 @@
-<div [ngClass]="themeClass">
+<div [ngClass]="themeClass" *ngIf="isloggedIn">
         <mat-sidenav-container class="example-container">
                 <mat-sidenav #sidenav mode="side" [(opened)]="open" [disableClose]="false" class="example-sidenav">
                         <app-sidenav></app-sidenav>
                 </mat-sidenav>
         <mat-sidenav-content>
                 <div class="fixed-header">
-                     <app-header (notify)='onNotify($event)' (themeChanger)='onThemeChange($event)'></app-header>
+                     <app-header (notify)='onNotify($event)' (themeChanger)='onThemeChange($event)' (loggedIn)='onLogout($event)'></app-header>
                 </div>
                 <div class="main-content">
                         <div class="container-fluid">
@@ -16,3 +16,6 @@
         </mat-sidenav-content>
         </mat-sidenav-container>
 </div>
+<div  fxLayout="row" fxLayoutAlign="center center" class="center-box" fxLayout.xs="column" fxLayoutAlign.xs="center stretch" *ngIf="!isloggedIn">
+        <router-outlet></router-outlet>
+</div>  

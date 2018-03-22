@@ -58,6 +58,10 @@ $screen-xl-min: 1200px;
 
 
 
+.center-box{
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+}
 
 
 .fixed-header {
@@ -67,11 +71,6 @@ $screen-xl-min: 1200px;
   z-index: 2;
   width: 100%  !important;
 }
-
-// mat-drawer{
-//   top:75px !important;
-//   left:45px !important;
-// }
 
 .main-content{
   margin-top: 75px;

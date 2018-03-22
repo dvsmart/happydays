@@ -27,10 +27,16 @@ export class LoginComponent implements OnInit {
 
   login() {
       this.loading = true;
-      this.authenticationService.login(this.model.username, this.model.password)
+      this.authenticationService.login(this.model)
           .subscribe(
               data => {
-                  this.router.navigate([this.returnUrl]);
+                  if(data != null){
+                      debugger;
+                    this.router.navigate([this.returnUrl]);
+                  }
+                  else{
+                    alert("Invalid Account");
+                  }
               },
               error => {
                   this.loading = false;
